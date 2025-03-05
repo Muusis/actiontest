@@ -1,0 +1,16 @@
+name: Manual thingy
+on:
+  workflow_dispatch:
+    inputs:
+      variable:
+        description: Define variable as you want
+        required: true
+        default: hehe
+jobs:
+  firstthingy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run a one-line script
+        run: echo "Hello, ${{ github.event.inputs.variable }}!"
