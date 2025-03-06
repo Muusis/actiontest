@@ -2,10 +2,23 @@ name: Manual thingy
 on:
   workflow_dispatch:
     inputs:
-      variable:
+      variable1:
         description: Define variable as you want
         required: true
         default: hehe
+      Color:
+        description: 'Color'
+        required: true
+        default: red
+        type: choice
+        options:
+        - red
+        - blue
+        - green
+      Happy:
+       description: 'Are you happy?'
+       required: true
+       type: boolean
 jobs:
   firstthingy:
     runs-on: ubuntu-latest
@@ -13,4 +26,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run a one-line script
-        run: echo "Hello, ${{ github.event.inputs.variable }}!"
+        run: echo "Hello, ${{ github.event.inputs.variable1 }}!"
+  secondthingy:
+    runs-on: ubuntu-latest
+    needs: firstthingy
+    steps:
+      - run: |
+          echo "variable1: ${{ inputs.variable1 }}"
+          echo "Color ${{ inputs.Color }}"
+      
