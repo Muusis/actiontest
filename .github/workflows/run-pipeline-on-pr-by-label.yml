@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Run Pipeline
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    branches:
+      - main
+    types: [labeled]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.label.name == "Action -> Run Pipeline" }}
+    steps:
+      - name: Checkout selected branch
+        uses: actions/checkout@v3
+      - name: Build
+        run: echo "Build"
+  build-setup:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout selected branch
+        uses: actions/checkout@v3
+      - name: Build Setup
+        run: echo "Build Setup"
+  integration-tests:
+    runs-on: ubuntu-latest
+    needs: build-setup
+    steps:
+      - name: Checkout selected branch
+        uses: actions/checkout@v3
+      - name: Integration Tests
+        run: echo "Integration Tests"
