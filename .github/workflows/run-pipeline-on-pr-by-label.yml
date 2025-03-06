@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.label.name == "Action -> Run Pipeline" }}
+    if: ${{ github.event.label.name == "Action Run Pipeline" }}
     steps:
       - name: Checkout selected branch
         uses: actions/checkout@v3
